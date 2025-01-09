@@ -269,15 +269,26 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 42),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            ...?ctrlAntrian.antrianDisplay.value.data?.antrian?.reversed.toList().sublist(0, 4).map((data) {
-                              final jenisAntrian = data.loket?.idAntrianJenis == 1 ? "Pendaftar Umum" : "Pendaftar BPJS";
-                              return cardAntrianLoket(context, "${data.loket?.namaLoket}", "${data.noAntrian}", jenisAntrian);
-                            }),
-                          ],
-                        ),
+                        child: ctrlAntrian.antrianDisplay.value.data?.antrian?.reversed.toList().isNotEmpty == true &&
+                                (ctrlAntrian.antrianDisplay.value.data?.antrian?.reversed.toList().length ?? 0) >= 5
+                            ? Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  ...?ctrlAntrian.antrianDisplay.value.data?.antrian?.reversed.toList().sublist(0, 4).map((data) {
+                                    final jenisAntrian = data.loket?.idAntrianJenis == 1 ? "Pendaftar Umum" : "Pendaftar BPJS";
+                                    return cardAntrianLoket(context, "${data.loket?.namaLoket}", "${data.noAntrian}", jenisAntrian);
+                                  }),
+                                ],
+                              )
+                            : Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  ...?ctrlAntrian.antrianDisplay.value.data?.antrian?.reversed.toList().map((data) {
+                                    final jenisAntrian = data.loket?.idAntrianJenis == 1 ? "Pendaftar Umum" : "Pendaftar BPJS";
+                                    return cardAntrianLoket(context, "${data.loket?.namaLoket}", "${data.noAntrian}", jenisAntrian);
+                                  }),
+                                ],
+                              ),
                       ),
                     ],
                   ),

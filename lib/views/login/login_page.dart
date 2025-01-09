@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_antrian/app/utils/util_strings.dart';
 import 'package:my_antrian/controllers/ctrl_auth.dart';
-import 'package:my_antrian/views/home/home_page.dart';
+
+import '../doctor/doctor_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -22,7 +23,7 @@ class _LoginPage extends State<LoginPage> with TickerProviderStateMixin {
       ctrlAuth.setBaseUrl(baseUrl);
       Future.delayed(const Duration(seconds: 1), () async {
         final url = await ctrlAuth.getBaseUrl();
-        if (url.isNotEmpty == true) Get.to(const HomePage());
+        if (url.isNotEmpty == true) Get.to(const DoctorPage());
       });
     }
   }
